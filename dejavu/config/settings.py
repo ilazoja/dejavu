@@ -58,7 +58,7 @@ CONNECTIVITY_MASK = 2
 
 # Sampling rate, related to the Nyquist conditions, which affects
 # the range frequencies we can detect.
-DEFAULT_FS = 44100
+DEFAULT_FS = 32000
 
 # Size of the FFT window, affects frequency granularity
 DEFAULT_WINDOW_SIZE = 4096
@@ -99,4 +99,4 @@ PEAK_SORT = True
 FINGERPRINT_REDUCTION = 20
 
 # Number of results being returned for file recognition
-TOPN = 2
+TOPN = 1

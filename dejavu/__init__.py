@@ -110,7 +110,7 @@ class Dejavu:
                 traceback.print_exc(file=sys.stdout)
             else:
                 sid = self.db.insert_song(song_name, file_hash, len(hashes))
-
+                print(f"Inserting {song_name} into db")
                 self.db.insert_hashes(sid, hashes)
                 self.db.set_song_fingerprinted(sid)
                 self.__load_fingerprinted_audio_hashes()

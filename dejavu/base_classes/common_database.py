@@ -2,6 +2,7 @@ import abc
 from typing import Dict, List, Tuple
 
 from dejavu.base_classes.base_database import BaseDatabase
+from psycopg2.extras import execute_values
 
 
 class CommonDatabase(BaseDatabase, metaclass=abc.ABCMeta):
@@ -166,9 +167,11 @@ class CommonDatabase(BaseDatabase, metaclass=abc.ABCMeta):
         """
         values = [(song_id, hsh, int(offset)) for hsh, offset in hashes]
 
+        # I was using 1000 for batch_size, but depending on your infrastructure you might want to fine tune it. Maybe 10000 would even be ok, or maybe only 100
         with self.cursor() as cur:
-            for index in range(0, len(hashes), batch_size):
-                cur.executemany(self.INSERT_FINGERPRINT, values[index: index + batch_size])
+            execute_values(cur, self.INSERT_FINGERPRINT_V2, values, "(%s, decode(%s, 'hex'), %s)", batch_size)
+            #for index in range(0, len(hashes), batch_size):
+            #    cur.executemany(self.INSERT_FINGERPRINT, values[index: index + batch_size])
 
     def return_matches(self, hashes: List[Tuple[str, int]],
                        batch_size: int = 1000) -> Tuple[List[Tuple[int, int]], Dict[int, int]]:
