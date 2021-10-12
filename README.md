@@ -20,8 +20,8 @@ Note: If the converted brstms keeps the loops intact, then continue, if not, the
 
 Note: It is advised that the unlabeled songs and labeled songs should have the same sample rate and maybe the same filetype
 
-4. In ost_recognizer.py Set the UNLABELED_BRSTM_DIR, UNLABELED_SONG_DIR and LABELED_SONG_DIR folders. They must be somewhere within the dejavu folder and the paths must be relative to the dejavu folder.
-5. Run docker (steps below) then run ost_recognizer.py
+4. In ost_recognizer.py, set the UNLABELED_BRSTM_DIR, UNLABELED_SONG_DIR and LABELED_SONG_DIR folders. They must be somewhere within the dejavu folder and the paths must be relative to the dejavu folder.
+5. Run docker (steps below) and run ost_recognizer.py
 
 ## Running the script with Docker
 
