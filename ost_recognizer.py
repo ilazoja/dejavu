@@ -8,12 +8,23 @@ from dejavu import Dejavu
 from dejavu.logic.recognizer.file_recognizer import FileRecognizer
 from dejavu.logic.recognizer.microphone_recognizer import MicrophoneRecognizer
 
+## This script labels unlabeled files obtained from an ost rip using a labeled soundtrack. Useful for renaming converted brstm files that are unlabeled
+
+### Instructions
+# 1. Obtain raw ost rip (e.g. from vgm hcs64) and convert to brstm using LoopingAudioConverter (these are referred to as unlabeled brstms)
+# 2. Convert above brstms to mp3s using LoopingAudioConverter (make sure to check Convert to mono) (these are referred to as unlabeled songs)
+# 3. Obtain soundtrack (e.g. from SittingOnClouds) and convert to single channel mp3s using LoopingAudioConverter (by checking Convert to mono) (these are referred to as labeled songs)
+# Note: It is advised that the unlabeled songs and labeld songs should have the same sample rate and maybe the same filetype
+# 4. Set the UNLABELED_BRSTM_DIR, UNLABELED_SONG_DIR and LABELED_SONG_DIR folders. They must be somewhere within the dejavu folder and the paths must be relative to the dejavu folder.
+# 5. Run docker then run this script
+
 # Note: Needs to have same sample rate as input
 UNLABELED_BRSTM_DIR = "./vgm/brstms/" # newly converted unlabeled brstms from ost rip preferably with desired sample rate
 UNLABELED_SONG_DIR = "./vgm/brstms/" # has to have matching filenames as above, files should be single channel
-LABELED_DIR = "./vgm/labeled/" # files should be single channel (preferably sample sample rate as above) not sure if same file type matters
+LABELED_SONG_DIR = "./vgm/labeled/" # files should be single channel (preferably sample sample rate as above) not sure if same file type matters
 
 INPUT_CONFIDENCE_THRESHOLD = 0.1 # minimum input confidence to consider a match
+# Additional settings can be modified in config/settings.py
 
 # load config from a JSON file (or anything outputting a python dictionary)
 config = {
@@ -32,12 +43,12 @@ if __name__ == '__main__':
     ## Fingerprint all the labeled songs in the directory we give it
     print("Fingerprinting labeled songs...")
 
-    djv.fingerprint_directory(LABELED_DIR, [".wav", ".mp3", ".flac", "m4a"])
+    djv.fingerprint_directory(LABELED_SONG_DIR, [".wav", ".mp3", ".flac", "m4a"])
 
     ## Create labeled songs dict
     labeled_songs = []
     for ext in ["*.wav", "*.mp3", "*.flac", "*.m4a"]:
-        labeled_songs.extend(glob.glob(os.path.join(glob.escape(LABELED_DIR), ext)))
+        labeled_songs.extend(glob.glob(os.path.join(glob.escape(LABELED_SONG_DIR), ext)))
     labeled_songs_dict = {}
     for labeled_song in labeled_songs:
         labeled_songs_dict[Path(labeled_song).stem] = []
