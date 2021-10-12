@@ -14,7 +14,7 @@ from dejavu.logic.recognizer.microphone_recognizer import MicrophoneRecognizer
 # 1. Obtain raw ost rip (e.g. from vgm hcs64) and convert to brstm using LoopingAudioConverter (these are referred to as unlabeled brstms)
 # 2. Convert above brstms to mp3s using LoopingAudioConverter (make sure to check Convert to mono) (these are referred to as unlabeled songs)
 # 3. Obtain soundtrack (e.g. from SittingOnClouds) and convert to single channel mp3s using LoopingAudioConverter (by checking Convert to mono) (these are referred to as labeled songs)
-# Note: It is advised that the unlabeled songs and labeld songs should have the same sample rate and maybe the same filetype
+# Note: It is advised that the unlabeled songs and labeled songs should have the same sample rate and maybe the same filetype
 # 4. Set the UNLABELED_BRSTM_DIR, UNLABELED_SONG_DIR and LABELED_SONG_DIR folders. They must be somewhere within the dejavu folder and the paths must be relative to the dejavu folder.
 # 5. Run docker then run this script
 
