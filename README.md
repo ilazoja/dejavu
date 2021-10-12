@@ -6,7 +6,7 @@ Audio fingerprinting and recognition algorithm implemented in Python, see the ex
 
 Dejavu can memorize audio by listening to it once and fingerprinting it. Then by playing a song, Dejavu attempts to match the audio against the fingerprints held in the database, returning the song being played. 
 
-This fork was made specifically to help identify unlabeled songs from an ost rip using a labeled soundtracks and rename their corresponding brstm files to the proper song.
+This fork was made specifically to help identify unlabeled songs from an ost rip using a labeled soundtracks and rename their corresponding brstm files to the proper song title.
 
 ## Instructions for ost recognition
 1. Obtain raw ost rip (e.g. from vgm hcs64) and convert to brstm using LoopingAudioConverter (these are referred to as unlabeled brstms)
